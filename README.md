@@ -14,3 +14,5 @@ Folder isam contains the modified isam library to optimize pose graphs. Please r
 
 Folder focused_mapping contains matlab scripts of our two-stage selection algorithms as well as compared algorithms. The main script is main_sim.m.
 Please specifies parameters in the second section when using.
+
+Data is contained in focused_mapping/data subfoler
