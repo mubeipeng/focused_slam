@@ -1,7 +1,7 @@
-# focused_slam
+## focused_slam
 This is the simulation code for "Two-Stage Focused Inference for Resource-Constrained Collision-Free Navigation". See bib reference below:
 
- @inproceedings{Mu_RSS_15, 
+ @Inproceedings{Mu_RSS_15, 
   	Author    = {B. Mu AND A. Agha-mohammadi AND L. Paull AND M. Graham AND J. How AND J. Leonard}, 
 	Title     = {Two-Stage Focused Inference for Resource-Constrained Collision-Free Navigation}, 
 	Booktitle = {Robotics Science and Systems}, 
@@ -10,8 +10,10 @@ This is the simulation code for "Two-Stage Focused Inference for Resource-Constr
 	Month     = {July} 
 }
 
+# iSAM library
 Folder isam contains the modified isam library to optimize pose graphs. Please refer to readme file in that folder for installation instructions.
 
+# two-stage selection script
 Folder focused_mapping contains matlab scripts of our two-stage selection algorithms as well as compared algorithms. The main script is main_sim.m.
 Please specifies parameters in the second section when using.
 
