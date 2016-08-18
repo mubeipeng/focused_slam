@@ -1,13 +1,13 @@
 # focused_slam
 This is the simulation code for "Two-Stage Focused Inference for Resource-Constrained Collision-Free Navigation". See bib reference below:
 
-@INPROCEEDINGS{Mu_RSS_15, 
-  AUTHOR    = {B. Mu AND A. Agha-mohammadi AND L. Paull AND M. Graham AND J. How AND J. Leonard}, 
-	TITLE     = {Two-Stage Focused Inference for Resource-Constrained Collision-Free Navigation}, 
-	BOOKTITLE = {Robotics Science and Systems}, 
-	YEAR      = {2015}, 
-	ADDRESS   = {Rome, Italy}, 
-	MONTH     = {July} 
+ @inproceedings{Mu_RSS_15, 
+  	Author    = {B. Mu AND A. Agha-mohammadi AND L. Paull AND M. Graham AND J. How AND J. Leonard}, 
+	Title     = {Two-Stage Focused Inference for Resource-Constrained Collision-Free Navigation}, 
+	Booktitle = {Robotics Science and Systems}, 
+	Year      = {2015}, 
+	Address   = {Rome, Italy}, 
+	Month     = {July} 
 }
 
 Folder isam contains the modified isam library to optimize pose graphs. Please refer to readme file in that folder for installation instructions.
