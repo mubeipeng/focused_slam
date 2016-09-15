@@ -11,10 +11,15 @@ This is the simulation code for "Two-Stage Focused Inference for Resource-Constr
 }
 
 ## iSAM library
-Folder isam contains the modified isam library to optimize pose graphs. Please refer to readme file in that folder for installation instructions.
+Folder isam contains the modified isam library to optimize pose graphs. There are pre-compiled executable file isam and sparse_graph_glc under the bin folder
+To compile from source, following the commands on ubuntu:
+cd isam
+mkdir build && cd build && cmake ..
+make
+Fore more details about the library, refer to readme file under isam folder.
 
 ## two-stage selection script
-Folder focused_mapping contains matlab scripts of our two-stage selection algorithms as well as compared algorithms. The main script is main_sim.m.
-Please specifies parameters in the second section when using.
+Folder focused_mapping contains matlab scripts of our two-stage selection algorithms as well as compared algorithms. The main script is main_simulate.m.
+
 
 Data is contained in focused_mapping/data subfoler
