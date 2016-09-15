@@ -44,7 +44,7 @@ dist_accru = 0;
 % variable_retain(1)=true;
 for ii=1:N_odom
     dist_accru = dist_accru + norm(node_edge.dpos(1:2,ii));
-    if dist_accru>=7
+    if dist_accru>=1.2
         variable_retain(ii)=true;
         dist_accru = 0;
     end

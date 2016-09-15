@@ -90,12 +90,16 @@ end
 if ~isempty(lm_cov)
     for i=1:size(lm_cov,1)
         idx = find(llm.id==lm_cov(i,1));
-        llm.cov(:,:,idx)=reshape(lm_cov(i,2:end),2,2);
+%         llm.cov(:,:,idx)=reshape(lm_cov(i,2:end),2,2);
+        cov_i = reshape(lm_cov(i,2:end),2,2);
+        llm.entropy(idx)= - log(det(cov_i));
+        
     end
 end
 if ~isempty(pose_cov)
     for i=1:size(pose_cov,1)
         idx = find(nnode.id==pose_cov(i,1));
-        nnode.cov(:,:,idx)=reshape(pose_cov(i,2:end),3,3);
+        cov_i = reshape(pose_cov(i,2:end),3,3);
+        nnode.entropy(idx)= - log(det(cov_i));
     end
 end

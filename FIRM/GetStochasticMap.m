@@ -45,7 +45,6 @@ Map_of_landmarks.covariances = map_landmarks_cov;
 for i = 1:size(map_landmarks_mean, 2)
     cov_i = Map_of_landmarks.covariances(2*i-1:2*i, 2*i-1:2*i);
     if cov_i(1,1) ~=100
-%         plot(map_landmarks_mean(1,i), map_landmarks_mean(2,i), 'g*')
         mean_i = map_landmarks_mean(:,i);
         line_width = 3;
         plotUncertainEllip2D(cov_i ,  mean_i ,   'g-', line_width , 0.5);

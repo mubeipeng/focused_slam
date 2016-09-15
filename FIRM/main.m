@@ -1,34 +1,35 @@
 % Add FIRM toolbox and external toolboxes as needed to the Matlab path
 addpath(genpath(pwd))
 add_external_toolboxes()
-
+num_runs = 1;
 %%
 load('../focused_mapping/simulation_results.mat','project_focus'); 
 lm_file = project_focus.lm; lm_file.pos = project_focus.lm_transformed(1:2,:);
-y_focus = run_simulator(lm_file);
+y_focus = run_simulator(lm_file,1);
 
 %%
 load('../focused_mapping/simulation_results.mat','project_full'); 
 lm_file = project_full.lm; lm_file.pos = project_full.lm_transformed(1:2,:);
-y_full = run_simulator(lm_file);
+y_full = run_simulator(lm_file,num_runs);
 
 %%
 load('../focused_mapping/simulation_results.mat','project_down'); 
 lm_file = project_down.lm; lm_file.pos = project_down.lm_transformed(1:2,:);
-y_down = run_simulator(lm_file);
+y_down = run_simulator(lm_file,num_runs);
 
 %%
 load('../focused_mapping/simulation_results.mat','project_glc_direct'); 
 lm_file = project_glc_direct.lm; lm_file.pos = project_glc_direct.lm_transformed(1:2,:);
-y_glc_direct = run_simulator(lm_file);
+y_glc_direct = run_simulator(lm_file,num_runs);
 
 %%
 load('../focused_mapping/simulation_results.mat','project_glc_optimize'); 
 lm_file = project_glc_optimize.lm; lm_file.pos = project_glc_optimize.lm_transformed(1:2,:);
-y_glc_optimize = run_simulator(lm_file);
+lm_file.entropy=lm_file.entropy-10; % glc does not converge in this case, manually add uncertainty
+y_glc_optimize = run_simulator(lm_file,num_runs);
 
 %%
-p=0:1/17:1;
+p=0:1/num_runs:1;
 figure; hold on;
 plot(sort([0 y_focus]),p);
 plot(sort([0 y_full]),p);

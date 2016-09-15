@@ -10,6 +10,11 @@ project.t_optimize=toc;
 project.lm.id = unique(lm_edge.id2,'stable');
 project.lm.id = project.lm.id-node_edge.id2(end);
 
+%% output statistics
+fprintf('number of poses %d\n', length(project.nodes.id));
+fprintf('number of landmarks %d\n', length(project.lm.id));
+fprintf('number of factors %d\n', length(project.node_edge.id1)+length(project.lm_edge.id1));
+
 %% compute error
 if ~isempty(lm_truth)
     pos_calculated = project.lm.pos;
@@ -24,19 +29,8 @@ if ~isempty(lm_truth)
 
     project.lm.err = sqrt(sum( (pos_opt - pos_calculated).^2));
     project.err = mean(project.lm.err);
-    
+    fprintf('mean error on landmarks: %f\n',project.err);    
     project.lm_transformed = pos_calculated;    
 end
-
-% compute min Mahalobinas dist
-Q = 1/node_edge.infoVec(1,1);
-R_info = lm_edge.infoVec(1,1);
-R_prior=0.1;
-
-odom = unique(node_edge.id1);
-n_observed_lm =  hist(lm_edge.id1,odom);
-node_cov = 0.5*Q+0.5*sqrt( Q.^2+4.*Q./(R_prior+R_info*n_observed_lm) );
-idx = node_edge.observe_lm;
-project.min_mahalobinas = min( node_edge.closeP(idx)./node_cov(1,idx).*node_edge.closeP(idx) );
 
 end

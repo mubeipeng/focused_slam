@@ -147,8 +147,11 @@ int main(int argc, char *argv[]){
 
     setup_isam();
     load_graph(argv[1]);
-    slam.update();
-    //slam.batch_optimization();
+    if(argv[4]=="true"){
+	slam.batch_optimization();
+    }else{
+	slam.update();
+    }
 
     list<Node*> node_remove;
     load_nodes(node_remove, argv[2]);

@@ -3,7 +3,7 @@ variableList = unique([node_edge.id1 node_edge.id2 lm_edge.id2]);
 N_var = length(variableList);
 
 J = zeros(N_var,N_var);
-J(1,1)=1e5;
+J(1,1)=1e8;
 for t=1:length(node_edge.id1);
     % compute covirance, proportional to distance of two poses.
     vIdx1 = find(variableList==node_edge.id1(t));
@@ -16,7 +16,7 @@ for t=1:length(node_edge.id1);
 end
 
 for t=1:length(J)
-    if J(t,t)<1e-5
-        J(t,t)=1e-5;
+    if J(t,t)<1e-4
+        J(t,t)=1e-4;
     end
 end

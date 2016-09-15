@@ -1,4 +1,4 @@
-function project = optimizeGLC(variable_remove, node_edge, lm_edge, isam_path, glc_file,lm_truth)
+function project = optimizeGLC(variable_remove, node_edge, lm_edge, isam_path, glc_file, global_opt, lm_truth)
 %% write variables to remove
 fid = fopen(glc_file,'w');
 for i=1:length(variable_remove)
@@ -12,7 +12,7 @@ slam_write(node_edge,lm_edge,g2o_file);
 
 %% optimize
 tic;
-system([isam_path, 'sparse_graph_glc ', g2o_file, ' ', glc_file, ' ', g2o_file]);
+system([isam_path, 'sparse_graph_glc ',  g2o_file, ' ', glc_file, ' ', g2o_file, ' ', global_opt]);
 project.t_optimize=toc;
 
 %% read
@@ -20,6 +20,10 @@ project.t_optimize=toc;
 ids = unique(lm_edge.id2,'stable') - node_edge.id2(end);
 project.lm.id = ids(project.lm.id - node_edge.id2(end));
 
+%% output statistics
+fprintf('number of poses %d\n', length(project.nodes.id));
+fprintf('number of landmarks %d\n', length(project.lm.id));
+fprintf('number of factors %d\n', length(project.node_edge.id1)+length(project.lm_edge.id1));
 
 %% compute error
 if ~isempty(lm_truth)
@@ -35,6 +39,7 @@ if ~isempty(lm_truth)
 
     project.lm.err = sqrt(sum( (pos_opt - pos_calculated).^2));
     project.err = mean(project.lm.err);
+    fprintf('mean error on landmarks: %f\n',project.err);    
     
     project.lm_transformed = pos_calculated;    
 end

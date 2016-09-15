@@ -48,9 +48,10 @@ cov_cc = zeros(size(J));
 cov_cc(~focusIdx,~focusIdx) = cov_full(~focusIdx,~focusIdx)...
     - cov_full(~focusIdx,focusIdx)/cov_full(focusIdx,focusIdx)*cov_full(focusIdx,~focusIdx);
 
-selectIdx = false(length(landmark_edge.id1),1);
+selectIdx = false(1, length(landmark_edge.id1));
+fprintf('compute measure');
 for i=1:N
-    fprintf('compute measure %i\n',i);
+    fprintf(' %i',i);    
     % compute values
     edge_value = zeros(size(variableList));
     parfor t=1:length(landmark_edge.id1)
@@ -79,14 +80,28 @@ for i=1:N
             - cov_full(~focusIdx,focusIdx)/cov_full(focusIdx,focusIdx)*cov_full(focusIdx,~focusIdx);
     %end
 end
+fprintf('\n');
+
+%% close loop on last pose
+for i=lm_focus_list
+    idx = (selectIdx & landmark_edge.id2==i);
+    if sum(idx)==1
+        selectIdx(idx)=false;
+    end
+end
 end
 
 %% 
 function [selectIdx] = selection_full(J, variableList, N_select, landmark_edge)
 cov_full = inv(J);
 selectIdx = false(length(landmark_edge.id1),1);
+fprintf('compute measure');
 for i=1:N_select
-    fprintf('compute measure %i\n',i);
+    if mod(i,25)==0
+        fprintf(' %i\n',i);
+    else
+        fprintf(' %i',i);
+    end
     % compute values
     edge_value = zeros(size(variableList));
     parfor t=1:length(landmark_edge.id1)
@@ -109,4 +124,5 @@ for i=1:N_select
     cov_full = cov_full - noise/(1+noise*[1 -1]*cov_full(vIdx,vIdx)*[1;-1])...
         *cov_full(:,vIdx)*[1 -1; -1 1]*cov_full(vIdx,:);
 end
+fprintf('\n');
 end

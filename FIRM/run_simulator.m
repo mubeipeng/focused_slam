@@ -1,4 +1,4 @@
-function l = run_simulator(lm_file)
+function l = run_simulator(lm_file,num_runs)
 global par;
 load('output/current_parameters');
 
@@ -33,7 +33,7 @@ om_computational = emptyRobot.om;
 
 
 %% This is where you should write your specific planning problem
-for i=1:17
+for i=1:num_runs
     i
 % prob_inst = Beipeng_Planning_Problem(sim,emptyRobot);
     prob_inst = Navigation_Problem(sim,emptyRobot);
